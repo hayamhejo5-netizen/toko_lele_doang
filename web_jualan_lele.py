@@ -142,36 +142,36 @@ if st.button("✨ KLIK: Proses & Cetak Invoice Resmi", type="primary", use_conta
         f"Ongkos Kirim: Rp {ongkir:,}\n"
         f"💰 *TOTAL BAYAR: Rp {grand_total:,}*\n\n"
         f"Mohon konfirmasi ketersediaan stok dan jadwal pengiriman ya Admin. Terima kasih!"
-)
+        )
 
-encoded_wa_text = urllib.parse.quote(format_pesan_wa)
-link_kirim_wa = f"https://api.whatsapp.com/send?phone=6282119635990&text={encoded_wa_text}"
+        encoded_wa_text = urllib.parse.quote(format_pesan_wa)
+        link_kirim_wa = f"https://api.whatsapp.com/send?phone=6282119635990&text={encoded_wa_text}"
 
-# Ini tombol WhatsApp bawaan kode kamu
-st.markdown(f'<a class="btn-whatsapp" href="{link_kirim_wa}" target="_blank" style="color: white; text-align: center;">Kirim ke WhatsApp</a>', unsafe_allow_html=True)
+        # Ini tombol WhatsApp bawaan kode kamu
+        st.markdown(f'<a class="btn-whatsapp" href="{link_kirim_wa}" target="_blank" style="color: white; text-align: center;">Kirim ke WhatsApp</a>', unsafe_allow_html=True)
 
 
-# =========================================================
-# TARUH KODE GOOGLE SHEETS DI SINI (SETELAH TOMBOL WA SELESAI)
-# =========================================================
-import requests
-
-data_ke_sheet = {
-    "no_invoice": no_invoice,
-    "tanggal": waktu_transaksi,
-    "nama": nama_pembeli,
-    "whatsapp": no_whatsapp,     
-    "alamat": alamat_kirim,       
-    "rincian": format_pesan_wa,   # <--- Sekarang ini aman karena sudah dibuat di atas!
-    "total_belanja": int(total_belanja),
-    "ongkir": int(ongkir),
-    "grand_total": int(grand_total)
-}
-
-# ⚠️ JANGAN LUPA: Ganti teks di bawah ini dengan URL Web App dari Google Sheets kamu!
-url_jembatan_sheets = "https://script.google.com/macros/s/AKfycbyI94fiH4UocDQIJU_XJid3V6bviqYzQzbrpke7LyAru1ljdoLWu9ziG8QPM4W67PBvYQ/exec"
-
-try:
-    requests.post(url_jembatan_sheets, json=data_ke_sheet)
-except Exception as e:
-    pass
+        # =========================================================
+        # TARUH KODE GOOGLE SHEETS DI SINI (SETELAH TOMBOL WA SELESAI)
+        # =========================================================
+        import requests
+        
+        data_ke_sheet = {
+            "no_invoice": no_invoice,
+            "tanggal": waktu_transaksi,
+            "nama": nama_pembeli,
+            "whatsapp": no_whatsapp,     
+            "alamat": alamat_kirim,       
+            "rincian": format_pesan_wa,   # <--- Sekarang ini aman karena sudah dibuat di atas!
+            "total_belanja": int(total_belanja),
+            "ongkir": int(ongkir),
+            "grand_total": int(grand_total)
+        }
+        
+        # ⚠️ JANGAN LUPA: Ganti teks di bawah ini dengan URL Web App dari Google Sheets kamu!
+        url_jembatan_sheets = "https://script.google.com/macros/s/AKfycbyI94fiH4UocDQIJU_XJid3V6bviqYzQzbrpke7LyAru1ljdoLWu9ziG8QPM4W67PBvYQ/exec"
+        
+        try:
+            requests.post(url_jembatan_sheets, json=data_ke_sheet)
+        except Exception as e:
+            pass
