@@ -148,7 +148,7 @@ if st.button("✨ KLIK: Proses & Cetak Invoice Resmi", type="primary", use_conta
         except Exception as e:
             pass # Mencegah web macet jika koneksi internet terganggu
         # INTEGRASI TELEPON / WHATSAPP ADMIN (Fix Eror String Unterminated)
-        nomor_admin_wa = "628123456789"
+        nomor_admin_wa = "6282119635990"
         format_pesan_wa = (
             f"🟢 *PESANAN BARU - TOKO LELE BERKAH DIGITAL* 🟢\n"
             f"No Invoice: {no_invoice}\n"
