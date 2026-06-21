@@ -124,50 +124,54 @@ if st.button("✨ KLIK: Proses & Cetak Invoice Resmi", type="primary", use_conta
         )
         
         st.markdown(invoice_html, unsafe_allow_html=True)
-        # === # === OTOMATISASI DATA KE GOOGLE SHEETS ===
-        import requests
-        
-        # Susun data sesuai urutan kolom Google Sheets
-        data_ke_sheet = {
-            "no_invoice": no_invoice,
-            "tanggal": waktu_transaksi,
-            "nama": nama_pembeli,
-            "whatsapp": no_whatsapp,     # ✅ SUDAH DI-FIX (Sesuai kode kamu)
-            "alamat": alamat_kirim,       # ✅ SUDAH DI-FIX (Sesuai kode kamu)
-            "rincian": format_pesan_wa, 
-            "total_belanja": int(total_belanja),
-            "ongkir": int(ongkir),
-            "grand_total": int(grand_total)
-        }
-        
-        # ⚠️ JANGAN LUPA: Ganti teks di bawah ini dengan URL Web App dari Google Sheets kamu!
-        url_jembatan_sheets = "https://script.google.com/macros/s/AKfycbx9fM3oojTytilBGsPP2QxuRzrD5-nPiCN03HV_YPbEr17sfXxA0tp2PflYUgBS5916/exec"
-        
-        try:
-            requests.post(url_jembatan_sheets, json=data_ke_sheet)
-        except Exception as e:
-            pass # Mencegah web macet jika koneksi internet terganggu
-        # INTEGRASI TELEPON / WHATSAPP ADMIN (Fix Eror String Unterminated)
-        nomor_admin_wa = "6282119635990"
-        format_pesan_wa = (
-            f"🟢 *PESANAN BARU - TOKO LELE BERKAH DIGITAL* 🟢\n"
-            f"No Invoice: {no_invoice}\n"
-            f"Waktu: {waktu_transaksi}\n\n"
-            f"👤 *DATA PELANGGAN*:\n"
-            f"Nama: {nama_pembeli}\n"
-            f"No. HP: {no_whatsapp}\n"
-            f"📍 *ALAMAT PENGIRIMAN*:\n"
-            f"{alamat_kirim}\n\n"
-            f"📋 *RINCIAN PESANAN*:\n"
-            f"{rincian_wa}\n"
-            f"-----------------------------------------\n"
-            f"Subtotal: Rp {total_belanja:,}\n"
-            f"Ongkos Kirim: Rp {ongkir:,}\n"
-            f"💰 *TOTAL BAYAR: Rp {grand_total:,}*\n\n"
-            f"Mohon konfirmasi ketersediaan stok dan jadwal pengiriman ya Admin. Terima kasih!"
-        )
-        
-        encoded_wa_text = urllib.parse.quote(format_pesan_wa)
-        link_kirim_wa = f"https://api.whatsapp.com/send?phone={6282119635990}&text={encoded_wa_text}"
-        
-        st.markdown(f'<a class="btn-whatsapp" href="{link_kirim_wa}" target="_blank" style="color: white; text-align: center; display: block; text-decoration: none;">📲 KLIK: Kirim Nota & Alamat ke WhatsApp Penjual</a>', unsafe_allow_html=True)
+       # INTEGRASI TELEPON / WHATSAPP ADMIN (Fix Eror String Unterminated)
+nomor_admin_wa = "6282119635990"
+format_pesan_wa = (
+    f"🟢 *PESANAN BARU - TOKO LELE BERKAH DIGITAL* 🟢\n"
+    f"No Invoice: {no_invoice}\n"
+    f"Waktu: {waktu_transaksi}\n\n"
+    f"👤 *DATA PELANGGAN*:\n"
+    f"Nama: {nama_pembeli}\n"
+    f"No. HP: {no_whatsapp}\n"
+    f"📍 *ALAMAT PENGIRIMAN*:\n"
+    f"{alamat_kirim}\n\n"
+    f"📋 *RINCIAN PESANAN*:\n"
+    f"{rincian_wa}\n"
+    f"----------------------------------------\n"
+    f"Subtotal: Rp {total_belanja:,}\n"
+    f"Ongkos Kirim: Rp {ongkir:,}\n"
+    f"💰 *TOTAL BAYAR: Rp {grand_total:,}*\n\n"
+    f"Mohon konfirmasi ketersediaan stok dan jadwal pengiriman ya Admin. Terima kasih!"
+)
+
+encoded_wa_text = urllib.parse.quote(format_pesan_wa)
+link_kirim_wa = f"https://api.whatsapp.com/send?phone=6282119635990&text={encoded_wa_text}"
+
+# Ini tombol WhatsApp bawaan kode kamu
+st.markdown(f'<a class="btn-whatsapp" href="{link_kirim_wa}" target="_blank" style="color: white; text-align: center;">Kirim ke WhatsApp</a>', unsafe_allow_html=True)
+
+
+# =========================================================
+# TARUH KODE GOOGLE SHEETS DI SINI (SETELAH TOMBOL WA SELESAI)
+# =========================================================
+import requests
+
+data_ke_sheet = {
+    "no_invoice": no_invoice,
+    "tanggal": waktu_transaksi,
+    "nama": nama_pembeli,
+    "whatsapp": no_whatsapp,     
+    "alamat": alamat_kirim,       
+    "rincian": format_pesan_wa,   # <--- Sekarang ini aman karena sudah dibuat di atas!
+    "total_belanja": int(total_belanja),
+    "ongkir": int(ongkir),
+    "grand_total": int(grand_total)
+}
+
+# ⚠️ JANGAN LUPA: Ganti teks di bawah ini dengan URL Web App dari Google Sheets kamu!
+url_jembatan_sheets = "https://script.google.com/macros/s/AKfycbyI94fiH4UocDQIJU_XJid3V6bviqYzQzbrpke7LyAru1ljdoLWu9ziG8QPM4W67PBvYQ/exec"
+
+try:
+    requests.post(url_jembatan_sheets, json=data_ke_sheet)
+except Exception as e:
+    pass
