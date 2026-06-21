@@ -124,7 +124,29 @@ if st.button("✨ KLIK: Proses & Cetak Invoice Resmi", type="primary", use_conta
         )
         
         st.markdown(invoice_html, unsafe_allow_html=True)
+        # === OTOMATISASI DATA KE GOOGLE SHEETS ===
+        import requests
         
+        # Susun data sesuai urutan kolom Google Sheets
+        data_ke_sheet = {
+            "no_invoice": no_invoice,
+            "tanggal": waktu_transaksi,
+            "nama": nama_pembeli,
+            "whatsapp": no_hp,
+            "alamat": alamat_pembeli,
+            "rincian": format_pesan_wa, # Rincian pesanan teks rapi
+            "total_belanja": int(total_belanja),
+            "ongkir": int(ongkir),
+            "grand_total": int(grand_total)
+        }
+        
+        # GANTI dengan URL Aplikasi Web yang kamu copy dari Google Apps Script tadi!
+        url_jembatan_sheets = "PASTE_URL_APPLIKASI_WEB_KAMU_DISINI"
+        
+        try:
+            requests.post(url_jembatan_sheets, json=data_ke_sheet)
+        except Exception as e:
+            pass # Mencegah web macet jika koneksi internet terganggu
         # INTEGRASI TELEPON / WHATSAPP ADMIN (Fix Eror String Unterminated)
         nomor_admin_wa = "628123456789"
         format_pesan_wa = (
