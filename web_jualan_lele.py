@@ -141,7 +141,7 @@ if st.button("✨ KLIK: Proses & Cetak Invoice Resmi", type="primary", use_conta
         }
         
         # GANTI dengan URL Aplikasi Web yang kamu copy dari Google Apps Script tadi!
-        url_jembatan_sheets = "PASTE_URL_APPLIKASI_WEB_KAMU_DISINI"
+        url_jembatan_sheets = "https://script.google.com/macros/s/AKfycbx9fM3oojTytilBGsPP2QxuRzrD5-nPiCN03HV_YPbEr17sfXxA0tp2PflYUgBS5916/exec"
         
         try:
             requests.post(url_jembatan_sheets, json=data_ke_sheet)
