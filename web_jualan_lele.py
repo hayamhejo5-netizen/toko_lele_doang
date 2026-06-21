@@ -124,7 +124,7 @@ if st.button("✨ KLIK: Proses & Cetak Invoice Resmi", type="primary", use_conta
         )
         
         st.markdown(invoice_html, unsafe_allow_html=True)
-        # === OTOMATISASI DATA KE GOOGLE SHEETS ===
+        # === # === OTOMATISASI DATA KE GOOGLE SHEETS ===
         import requests
         
         # Susun data sesuai urutan kolom Google Sheets
@@ -132,15 +132,15 @@ if st.button("✨ KLIK: Proses & Cetak Invoice Resmi", type="primary", use_conta
             "no_invoice": no_invoice,
             "tanggal": waktu_transaksi,
             "nama": nama_pembeli,
-            "whatsapp": no_hp,
-            "alamat": alamat_pembeli,
-            "rincian": format_pesan_wa, # Rincian pesanan teks rapi
+            "whatsapp": no_whatsapp,     # ✅ SUDAH DI-FIX (Sesuai kode kamu)
+            "alamat": alamat_kirim,       # ✅ SUDAH DI-FIX (Sesuai kode kamu)
+            "rincian": format_pesan_wa, 
             "total_belanja": int(total_belanja),
             "ongkir": int(ongkir),
             "grand_total": int(grand_total)
         }
         
-        # GANTI dengan URL Aplikasi Web yang kamu copy dari Google Apps Script tadi!
+        # ⚠️ JANGAN LUPA: Ganti teks di bawah ini dengan URL Web App dari Google Sheets kamu!
         url_jembatan_sheets = "https://script.google.com/macros/s/AKfycbx9fM3oojTytilBGsPP2QxuRzrD5-nPiCN03HV_YPbEr17sfXxA0tp2PflYUgBS5916/exec"
         
         try:
