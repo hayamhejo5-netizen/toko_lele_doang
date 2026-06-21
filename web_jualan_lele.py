@@ -121,27 +121,27 @@ if st.button("✨ KLIK: Proses & Cetak Invoice Resmi", type="primary", use_conta
             f'</table>'
             f'<p style="text-align:center; font-size:12px; color:#94a3b8; margin-top:30px; font-style:italic;">Terima kasih atas kepercayaan Anda berbelanja di Toko Lele Berkah.</p>'
             f'</div>'
-        )
+            )
         
         st.markdown(invoice_html, unsafe_allow_html=True)
-       # INTEGRASI TELEPON / WHATSAPP ADMIN (Fix Eror String Unterminated)
-nomor_admin_wa = "6282119635990"
-format_pesan_wa = (
-    f"🟢 *PESANAN BARU - TOKO LELE BERKAH DIGITAL* 🟢\n"
-    f"No Invoice: {no_invoice}\n"
-    f"Waktu: {waktu_transaksi}\n\n"
-    f"👤 *DATA PELANGGAN*:\n"
-    f"Nama: {nama_pembeli}\n"
-    f"No. HP: {no_whatsapp}\n"
-    f"📍 *ALAMAT PENGIRIMAN*:\n"
-    f"{alamat_kirim}\n\n"
-    f"📋 *RINCIAN PESANAN*:\n"
-    f"{rincian_wa}\n"
-    f"----------------------------------------\n"
-    f"Subtotal: Rp {total_belanja:,}\n"
-    f"Ongkos Kirim: Rp {ongkir:,}\n"
-    f"💰 *TOTAL BAYAR: Rp {grand_total:,}*\n\n"
-    f"Mohon konfirmasi ketersediaan stok dan jadwal pengiriman ya Admin. Terima kasih!"
+        # INTEGRASI TELEPON / WHATSAPP ADMIN (Fix Eror String Unterminated)
+        nomor_admin_wa = "6282119635990"
+        format_pesan_wa = (
+        f"🟢 *PESANAN BARU - TOKO LELE BERKAH DIGITAL* 🟢\n"
+        f"No Invoice: {no_invoice}\n"
+        f"Waktu: {waktu_transaksi}\n\n"
+        f"👤 *DATA PELANGGAN*:\n"
+        f"Nama: {nama_pembeli}\n"
+        f"No. HP: {no_whatsapp}\n"
+        f"📍 *ALAMAT PENGIRIMAN*:\n"
+        f"{alamat_kirim}\n\n"
+        f"📋 *RINCIAN PESANAN*:\n"
+        f"{rincian_wa}\n"
+        f"----------------------------------------\n"
+        f"Subtotal: Rp {total_belanja:,}\n"
+        f"Ongkos Kirim: Rp {ongkir:,}\n"
+        f"💰 *TOTAL BAYAR: Rp {grand_total:,}*\n\n"
+        f"Mohon konfirmasi ketersediaan stok dan jadwal pengiriman ya Admin. Terima kasih!"
 )
 
 encoded_wa_text = urllib.parse.quote(format_pesan_wa)
